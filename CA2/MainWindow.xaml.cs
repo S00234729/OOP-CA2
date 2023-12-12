@@ -20,10 +20,36 @@ namespace CA2
     /// </summary>
     public partial class MainWindow : Window
     {
+        //add lists
+        List<Team> teams = new List<Team>();
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //call method
+            GetData();
+            //display items in listbox
+            lbx_Teams.ItemsSource = teams;
+        }
+
+        
+
+        public void GetData()
+        {      
+            //Make Teames
+            Team t1 = new Team() { Name = "France" };
+            Team t2 = new Team() { Name = "Italy" };
+            Team t3 = new Team() { Name = "Spain" };
+            //add teams to a list
+            teams.Add(t1);
+            teams.Add(t2);
+            teams.Add(t3);
+        }
+
 
     }
 }

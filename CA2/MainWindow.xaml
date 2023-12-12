@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CA2"
         mc:Ignorable="d" 
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <TextBlock x:Name="tblk_title" HorizontalAlignment="Center" Margin="0,36,0,0" TextWrapping="Wrap" Text="TiddlyWinks World Cup" VerticalAlignment="Top" FontSize="36"/>
         <TextBlock x:Name="tblk_Teams" HorizontalAlignment="Left" Margin="105,125,0,0" TextWrapping="Wrap" Text="Teams" VerticalAlignment="Top" Height="21" Width="41"/>
