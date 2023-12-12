@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CA2
 {
+    
     public class Team
     {
         //create vars and lists
         public string Name { get; set; }
-        List<Player> Player = new List<Player>();
+        public List<Player> Player = new List<Player>();
 
         //methods
         public override string ToString()
@@ -19,6 +20,7 @@ namespace CA2
             return Name.ToString();
         }
 
+        
 
     }
     
