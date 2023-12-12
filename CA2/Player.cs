@@ -9,8 +9,8 @@ namespace CA2
     public class Player
     {
         //set up vars
-        string Name;
-        string ResultRecord;
+        public string Name { get; set; }
+        public string ResultRecord { get; set; }
 
         //French players
         Player p1 = new Player() { Name = "Marie", ResultRecord = "WWDDL" };
