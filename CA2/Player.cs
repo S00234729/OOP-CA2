@@ -12,7 +12,11 @@ namespace CA2
         public string Name { get; set; }
         public string ResultRecord { get; set; }
 
-        
+        public override string ToString()
+        {
+            //change the names of teams to strings
+            return Name.ToString();
+        }
 
     }
 }

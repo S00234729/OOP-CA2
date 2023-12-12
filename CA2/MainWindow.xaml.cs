@@ -84,6 +84,18 @@ namespace CA2
             t3.Player.Add(p9);
         }
 
+        private void lbx_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Team selected = lbx_Teams.SelectedItem as Team;
 
+            if (selected != null)
+            {
+                lbx_players.ItemsSource = selected.Player;
+            }
+            else
+            {
+                lbx_players.ItemsSource = null;
+            }
+        }
     }
 }
