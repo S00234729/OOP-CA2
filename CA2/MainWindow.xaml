@@ -10,7 +10,7 @@
         <TextBlock x:Name="tblk_title" HorizontalAlignment="Center" Margin="0,36,0,0" TextWrapping="Wrap" Text="TiddlyWinks World Cup" VerticalAlignment="Top" FontSize="36"/>
         <TextBlock x:Name="tblk_Teams" HorizontalAlignment="Left" Margin="105,125,0,0" TextWrapping="Wrap" Text="Teams" VerticalAlignment="Top" Height="21" Width="41"/>
         <TextBlock x:Name="tblk_Players" HorizontalAlignment="Left" Margin="400,128,0,0" TextWrapping="Wrap" Text="Players" VerticalAlignment="Top"/>
-        <ListBox x:Name="lbx_Teams" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="105,151,506,69"/>
+        <ListBox x:Name="lbx_Teams" Margin="105,151,506,69"/>
         <ListBox x:Name="lbx_players" Margin="400,151,214,69"/>
         <TextBlock x:Name="tblk_Rating" HorizontalAlignment="Left" Margin="627,128,0,0" TextWrapping="Wrap" Text="Players Rating" VerticalAlignment="Top"/>
         <Image x:Name="img_star_1" HorizontalAlignment="Left" Height="38" Margin="627,151,0,0" VerticalAlignment="Top" Width="37" Source="/images/staroutline.png"/>
