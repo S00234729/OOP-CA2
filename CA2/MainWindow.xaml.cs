@@ -18,6 +18,7 @@ namespace CA2
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// Link To Github https://github.com/S00234729/OOP-CA2
     public partial class MainWindow : Window
     {
         //add lists
@@ -54,19 +55,30 @@ namespace CA2
 
             //make Players
             //French players
-            Player p1 = new Player() { Name = "Marie", ResultRecord = "WWDDL" };
-            Player p2 = new Player() { Name = "Claude", ResultRecord = "DDDLW" };
-            Player p3 = new Player() { Name = "Antoine", ResultRecord = "LWDLW" };
+            Player p1 = new Player() { Name = "Marie", ResultRecord = "WWDDL", score = 0};
+            Player p2 = new Player() { Name = "Claude", ResultRecord = "DDDLW",score = 0};
+            Player p3 = new Player() { Name = "Antoine", ResultRecord = "LWDLW", score = 0};
 
             //Italian players
-            Player p4 = new Player() { Name = "Marco", ResultRecord = "WWDLL" };
-            Player p5 = new Player() { Name = "Giovanni", ResultRecord = "LLLLD" };
-            Player p6 = new Player() { Name = "Valentina", ResultRecord = "DLWWW" };
+            Player p4 = new Player() { Name = "Marco", ResultRecord = "WWDLL", score = 0};
+            Player p5 = new Player() { Name = "Giovanni", ResultRecord = "LLLLD", score = 0};
+            Player p6 = new Player() { Name = "Valentina", ResultRecord = "DLWWW", score = 0};
 
             //Spanish players
-            Player p7 = new Player() { Name = "Maria", ResultRecord = "WWWWW" };
-            Player p8 = new Player() { Name = "Jose", ResultRecord = "LLLLL" };
-            Player p9 = new Player() { Name = "Pablo", ResultRecord = "DDDDD" };
+            Player p7 = new Player() { Name = "Maria", ResultRecord = "WWWWW", score = 0};
+            Player p8 = new Player() { Name = "Jose", ResultRecord = "LLLLL", score = 0};
+            Player p9 = new Player() { Name = "Pablo", ResultRecord = "DDDDD", score = 0};
+
+            //calculate score for each player
+            p1.score = CalculateScore(p1.ResultRecord);
+            p2.score = CalculateScore(p2.ResultRecord);
+            p3.score = CalculateScore(p3.ResultRecord);
+            p4.score = CalculateScore(p4.ResultRecord);
+            p5.score = CalculateScore(p5.ResultRecord);
+            p6.score = CalculateScore(p6.ResultRecord);
+            p7.score = CalculateScore(p7.ResultRecord);
+            p8.score = CalculateScore(p8.ResultRecord);
+            p9.score = CalculateScore(p9.ResultRecord);
 
             //add the players to team 1
             t1.Player.Add(p1);
@@ -82,20 +94,73 @@ namespace CA2
             t3.Player.Add(p7);
             t3.Player.Add(p8);
             t3.Player.Add(p9);
+
+            
+
+            
         }
 
         private void lbx_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //to display the selected teams players
             Team selected = lbx_Teams.SelectedItem as Team;
-
+            //display the players 
             if (selected != null)
             {
+                
                 lbx_players.ItemsSource = selected.Player;
+                
+                
             }
             else
             {
                 lbx_players.ItemsSource = null;
             }
+        }
+
+        public int CalculateScore(string RecordedResult)
+        {
+            //make vars for score and chars for the letters to search
+            int score = 0;
+            char W = 'W';
+            char D = 'D';
+            
+
+            //calculate how many of each letter there is
+            int noOfW = count(RecordedResult, W);
+            int noOfD = count(RecordedResult, D);
+
+            //add up the scores
+            if (noOfW >=1)
+            {
+                score = score + (noOfW * 3);
+            }
+            if (noOfD >=1)
+            {
+                score = score + noOfD;
+            }
+            
+
+
+
+            
+            
+            return score;
+        }
+
+
+        int count(string s, char c)
+        {
+            // Count variable
+            int res = 0;
+
+            for (int i = 0; i < s.Length; i++)
+
+                // checking character in string
+                if (s[i] == c)
+                    res++;
+
+            return res;
         }
     }
 }
