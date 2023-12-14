@@ -54,6 +54,9 @@ namespace CA2
         {
             //call method
             GetData();
+
+            //sort teams
+            teams.Sort();
             //display items in listbox
             lbx_Teams.ItemsSource = teams;
 
@@ -137,8 +140,11 @@ namespace CA2
             //display the players 
             if (selected != null)
             {
+                //update display of players and teams
                 lbx_players.Items.Clear();
                 lbx_players.ItemsSource = selected.Player;
+
+                teams.Sort();
 
                 lbx_Teams.ItemsSource = null;
                 lbx_Teams.ItemsSource = teams;
