@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,25 @@ namespace CA2
     {
         //add lists
         List<Team> teams = new List<Team>();
-       
+        //Make Teames
+        Team t1 = new Team() { Name = "France", TeamPoints = 0 };
+        Team t2 = new Team() { Name = "Italy", TeamPoints = 0 };
+        Team t3 = new Team() { Name = "Spain", TeamPoints = 0 };
+        //make Players
+        //French players
+            Player p1 = new Player() { Name = "Marie", ResultRecord = "WWDDL", score = 0 };
+        Player p2 = new Player() { Name = "Claude", ResultRecord = "DDDLW", score = 0 };
+        Player p3 = new Player() { Name = "Antoine", ResultRecord = "LWDLW", score = 0 };
+
+        //Italian players
+        Player p4 = new Player() { Name = "Marco", ResultRecord = "WWDLL", score = 0 };
+        Player p5 = new Player() { Name = "Giovanni", ResultRecord = "LLLLD", score = 0 };
+        Player p6 = new Player() { Name = "Valentina", ResultRecord = "DLWWW", score = 0 };
+
+        //Spanish players
+        Player p7 = new Player() { Name = "Maria", ResultRecord = "WWWWW", score = 0 };
+        Player p8 = new Player() { Name = "Jose", ResultRecord = "LLLLL", score = 0 };
+        Player p9 = new Player() { Name = "Pablo", ResultRecord = "DDDDD", score = 0 };
 
         public MainWindow()
         {
@@ -45,30 +64,13 @@ namespace CA2
 
         public void GetData()
         {      
-            //Make Teames
-            Team t1 = new Team() { Name = "France" };
-            Team t2 = new Team() { Name = "Italy" };
-            Team t3 = new Team() { Name = "Spain" };
+            ;
             //add teams to a list
             teams.Add(t1);
             teams.Add(t2);
             teams.Add(t3);
 
-            //make Players
-            //French players
-            Player p1 = new Player() { Name = "Marie", ResultRecord = "WWDDL", score = 0};
-            Player p2 = new Player() { Name = "Claude", ResultRecord = "DDDLW",score = 0};
-            Player p3 = new Player() { Name = "Antoine", ResultRecord = "LWDLW", score = 0};
-
-            //Italian players
-            Player p4 = new Player() { Name = "Marco", ResultRecord = "WWDLL", score = 0};
-            Player p5 = new Player() { Name = "Giovanni", ResultRecord = "LLLLD", score = 0};
-            Player p6 = new Player() { Name = "Valentina", ResultRecord = "DLWWW", score = 0};
-
-            //Spanish players
-            Player p7 = new Player() { Name = "Maria", ResultRecord = "WWWWW", score = 0};
-            Player p8 = new Player() { Name = "Jose", ResultRecord = "LLLLL", score = 0};
-            Player p9 = new Player() { Name = "Pablo", ResultRecord = "DDDDD", score = 0};
+            
 
             //calculate score for each player
             p1.score = CalculateScore(p1.ResultRecord);
@@ -81,10 +83,16 @@ namespace CA2
             p8.score = CalculateScore(p8.ResultRecord);
             p9.score = CalculateScore(p9.ResultRecord);
 
+            //get team points
+            t1.TeamPoints = p1.score + p2.score + p3.score;
+            t2.TeamPoints = p4.score + p5.score + p6.score;
+            t3.TeamPoints = p7.score + p8.score + p9.score;
+
             //add the players to team 1
             t1.Player.Add(p1);
             t1.Player.Add(p2);
             t1.Player.Add(p3);
+            
 
             //addplayers to team 2
             t2.Player.Add(p4);
@@ -103,13 +111,27 @@ namespace CA2
 
         private void lbx_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshScreen();
+            //to display the selected teams players
+            Team selected = lbx_Teams.SelectedItem as Team;
+            //display the players 
+            if (selected != null)
+            {
+
+                lbx_players.ItemsSource = selected.Player;
+
+                
+            }
+            else
+            {
+                lbx_players.ItemsSource = null;
+            }
+            
         }
 
         public void RefreshScreen()
         {
+            
 
-           
             //to display the selected teams players
             Team selected = lbx_Teams.SelectedItem as Team;
             //display the players 
@@ -118,13 +140,11 @@ namespace CA2
                 lbx_players.Items.Clear();
                 lbx_players.ItemsSource = selected.Player;
 
+                lbx_Teams.ItemsSource = null;
+                lbx_Teams.ItemsSource = teams;
+
 
             }
-            else
-            {
-                lbx_players.ItemsSource = null;
-            }
-
             
         }
         public int CalculateScore(string RecordedResult)
@@ -157,6 +177,32 @@ namespace CA2
             return score;
         }
 
+        public int CalculateTeamScore()
+        {
+            Team team = lbx_Teams.SelectedItem as Team;
+
+            int teamscore;
+
+            
+                if (team == t1)
+                {
+                    teamscore = p1.score + p2.score + p3.score;
+                return teamscore;
+
+            }
+                else if (team == t2)
+                {
+                    teamscore = p4.score + p5.score + p6.score;
+                return teamscore;
+            }
+                else
+                {
+                    teamscore = p7.score + p8.score + p9.score;
+                return teamscore;
+            }  
+
+        }
+
 
         int count(string s, char c)
         {
@@ -185,6 +231,7 @@ namespace CA2
 
         private void btn_Win_Click(object sender, RoutedEventArgs e)
         {
+            Team team = lbx_Teams.SelectedItem as Team;
             Player selected = lbx_players.SelectedItem as Player;
             string Win = "W";
 
@@ -201,11 +248,13 @@ namespace CA2
 
                 lbx_players.ItemsSource = null;
 
-                
 
+                team.TeamPoints = CalculateTeamScore();
+                
                 RefreshScreen();
 
                 
+               
 
             }
 
@@ -216,6 +265,7 @@ namespace CA2
 
         private void btn_Lose_Click(object sender, RoutedEventArgs e)
         {
+            Team team = lbx_Teams.SelectedItem as Team;
             Player selected = lbx_players.SelectedItem as Player;
             string Win = "L";
 
@@ -233,7 +283,7 @@ namespace CA2
                 lbx_players.ItemsSource = null;
 
 
-
+                team.TeamPoints = CalculateTeamScore();
                 RefreshScreen();
 
 
@@ -243,6 +293,7 @@ namespace CA2
 
         private void btn_Draw_Click(object sender, RoutedEventArgs e)
         {
+            Team team = lbx_Teams.SelectedItem as Team;
             Player selected = lbx_players.SelectedItem as Player;
             string Win = "D";
 
@@ -260,7 +311,7 @@ namespace CA2
                 lbx_players.ItemsSource = null;
 
 
-
+                team.TeamPoints = CalculateTeamScore();
                 RefreshScreen();
 
 

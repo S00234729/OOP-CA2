@@ -11,13 +11,15 @@ namespace CA2
     {
         //create vars and lists
         public string Name { get; set; }
+        public int TeamPoints { get; set; }
+
         public List<Player> Player  = new List<Player>();
 
         //methods
         public override string ToString()
         {
             //change the names of teams to strings
-            return Name;
+            return $"{Name.ToString()}-{TeamPoints}";
             
         }
 

@@ -20,7 +20,7 @@ namespace CA2
         public override string ToString()
         {
             //change the names of teams to strings
-            return $"{Name.ToString()} {ResultRecord.ToString()} {score}";
+            return $"{Name.ToString()}-{ResultRecord.ToString()}-{score}";
             
         }
 
