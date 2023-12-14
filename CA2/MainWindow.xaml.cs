@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -102,22 +103,30 @@ namespace CA2
 
         private void lbx_Teams_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            RefreshScreen();
+        }
+
+        public void RefreshScreen()
+        {
+
+           
             //to display the selected teams players
             Team selected = lbx_Teams.SelectedItem as Team;
             //display the players 
             if (selected != null)
             {
-                
+                lbx_players.Items.Clear();
                 lbx_players.ItemsSource = selected.Player;
-                
-                
+
+
             }
             else
             {
                 lbx_players.ItemsSource = null;
             }
-        }
 
+            
+        }
         public int CalculateScore(string RecordedResult)
         {
             //make vars for score and chars for the letters to search
@@ -161,6 +170,102 @@ namespace CA2
                     res++;
 
             return res;
+        }
+
+        public string NewRecord(string OldRecord, string input)
+        {
+            //remove first char in string
+            //add new char
+            string NewRecord1 = OldRecord.Remove(0, 1);
+            string NewRecord2 = NewRecord1.Insert(4, input);
+
+
+            return NewRecord2;
+        }
+
+        private void btn_Win_Click(object sender, RoutedEventArgs e)
+        {
+            Player selected = lbx_players.SelectedItem as Player;
+            string Win = "W";
+
+
+
+            if (selected != null)
+            {
+                 string NewScore  = NewRecord(selected.ResultRecord, Win);
+
+                selected.ResultRecord = NewScore;
+
+                selected.score = CalculateScore(selected.ResultRecord);
+
+
+                lbx_players.ItemsSource = null;
+
+                
+
+                RefreshScreen();
+
+                
+
+            }
+
+            
+            
+
+        }
+
+        private void btn_Lose_Click(object sender, RoutedEventArgs e)
+        {
+            Player selected = lbx_players.SelectedItem as Player;
+            string Win = "L";
+
+
+
+            if (selected != null)
+            {
+                string NewScore = NewRecord(selected.ResultRecord, Win);
+
+                selected.ResultRecord = NewScore;
+
+                selected.score = CalculateScore(selected.ResultRecord);
+
+
+                lbx_players.ItemsSource = null;
+
+
+
+                RefreshScreen();
+
+
+
+            }
+        }
+
+        private void btn_Draw_Click(object sender, RoutedEventArgs e)
+        {
+            Player selected = lbx_players.SelectedItem as Player;
+            string Win = "D";
+
+
+
+            if (selected != null)
+            {
+                string NewScore = NewRecord(selected.ResultRecord, Win);
+
+                selected.ResultRecord = NewScore;
+
+                selected.score = CalculateScore(selected.ResultRecord);
+
+
+                lbx_players.ItemsSource = null;
+
+
+
+                RefreshScreen();
+
+
+
+            }
         }
     }
 }
