@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CA2
 {
@@ -59,6 +60,10 @@ namespace CA2
             teams.Sort();
             //display items in listbox
             lbx_Teams.ItemsSource = teams;
+
+            img_star_1.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
+            img_star_2.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
+            img_Star_3.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
 
 
         }
@@ -130,7 +135,7 @@ namespace CA2
             }
             
         }
-
+        
         public void RefreshScreen()
         {
             
@@ -324,5 +329,39 @@ namespace CA2
 
             }
         }
+        
+        private void lbx_players_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Player player = lbx_players.SelectedItem as Player;
+            if (player != null)
+            {
+                if (player.score <= 0)
+                {
+                    img_star_1.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
+                    img_star_2.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
+                    img_Star_3.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
+                }
+                else if (player.score >= 1 && player.score <= 5)
+                {
+                    img_star_1.Source = new BitmapImage(new Uri("starsolid.png", UriKind.Relative));
+                    img_star_2.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
+                    img_Star_3.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
+                }
+                else if (player.score >= 6 && player.score <= 10)
+                {
+                    img_star_1.Source = new BitmapImage(new Uri("starsolid.png", UriKind.Relative));
+                    img_star_2.Source = new BitmapImage(new Uri("starsolid.png", UriKind.Relative));
+                    img_Star_3.Source = new BitmapImage(new Uri("staroutline.png", UriKind.Relative));
+                }
+                else if (player.score >= 11 && player.score <= 15)
+                {
+                    img_star_1.Source = new BitmapImage(new Uri("starsolid.png", UriKind.Relative));
+                    img_star_2.Source = new BitmapImage(new Uri("starsolid.png", UriKind.Relative));
+                    img_Star_3.Source = new BitmapImage(new Uri("starsolid.png", UriKind.Relative));
+                }
+            }
+
+        }
+        
     }
 }

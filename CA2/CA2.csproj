@@ -97,10 +97,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\staroutline.png" />
+    <Resource Include="staroutline.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\starsolid.png" />
+    <Resource Include="starsolid.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
